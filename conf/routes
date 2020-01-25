@@ -3,7 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                                                 controllers.Application.index
 
+# transfer
+POST    /transfer                                         controllers.TransferController.transfer
+
+# customer
+GET    /customer/:customerId/logs/:accountId              controllers.CustomerController.getTransferLogs(customerId: Long, accountId: Long)
+GET    /customer/:customerId/accounts                     controllers.CustomerController.getAccounts(customerId: Long)
+POST   /customer/onboard                                  controllers.CustomerController.onboard
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
