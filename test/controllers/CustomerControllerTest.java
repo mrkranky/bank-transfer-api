@@ -9,6 +9,8 @@ import models.Account;
 import models.Account.CurrencyEnum;
 import models.Customer;
 import models.TransferLog;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import play.Application;
 import play.db.jpa.JPAApi;
@@ -37,6 +39,8 @@ public class CustomerControllerTest extends WithApplication {
     private ObjectMapper mapper = new ObjectMapper();
     private Gson gson = new Gson();
 
+    private Application app;
+
     /**
      * DB SNAPSNOT AFTER INITIALISATION
      *
@@ -49,15 +53,20 @@ public class CustomerControllerTest extends WithApplication {
      * 19283751	  50000.00	   SGD	        5
      * 19283752	  67000.00	   SGD	        5
      */
-    @Override
-    protected Application provideApplication() {
-        Application app = new GuiceApplicationBuilder().build();
+    @Before
+    public void setup() {
+        app = new GuiceApplicationBuilder().build();
+
+        Helpers.start(app);
 
         // init DB
         InMemoryDbInitialiser inMemoryDbInitialiser = app.injector().instanceOf(InMemoryDbInitialiser.class);
         inMemoryDbInitialiser.init();
+    }
 
-        return app;
+    @After
+    public void teardown() {
+        Helpers.stop(app);
     }
 
     @Test

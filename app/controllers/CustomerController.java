@@ -25,17 +25,11 @@ public class CustomerController extends Controller {
 
     @Transactional(readOnly = true)
     public Result getTransferLogs(Long customerId, Long accountId) {
-        if (customerId == null || accountId == null)
-            return badRequest("Customer ID or account ID cannot empty to fetch transfer logs");
-
         return ok(toJson(customerDao.getTransferLogs(customerId, accountId)));
     }
 
     @Transactional(readOnly = true)
     public Result getAccounts(Long customerId) {
-        if (customerId == null)
-            return badRequest("Customer ID to fetch account information");
-
         Optional<Customer> customer = customerDao.getCustomerById(customerId);
         return customer.map(c -> ok(toJson(c))).orElseGet(() -> internalServerError("customer not found"));
     }

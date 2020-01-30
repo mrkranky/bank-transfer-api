@@ -1,8 +1,5 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +17,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="customers")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
@@ -45,11 +40,6 @@ public class Customer extends BaseModel {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Account> accounts = new ArrayList<>();
-
-    @JsonIgnore
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @Column(name="deleted_at")
-    private Date deletedAt;
 
     private void addAccount(Account account) {
         account.setCustomer(this);

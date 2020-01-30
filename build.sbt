@@ -5,6 +5,15 @@ lazy val `bank-transfer-api` = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.11.11"
 
+// excluding play generated route, reverse route files and static error handler in utils
+jacocoExcludes := Seq(
+  "utils.*",
+  "router.*",
+  "controllers.javascript.*",
+  "controllers.routes*",
+  "controllers.Reverse*"
+)
+
 libraryDependencies ++= Seq(
   javaJdbc , cache , javaWs, javaJpa,
   "org.projectlombok" % "lombok" % "1.18.2",

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import dao.CustomerDao;
 import models.Account;
 import models.Customer;
+import play.Logger;
 
 import java.math.BigDecimal;
 
@@ -54,5 +55,14 @@ public class InMemoryDbInitialiser {
 
             return null;
         });
+
+        Logger.info("\nIN-MEMORY ACCOUNTS TABLE - \nID  \t      BALANCE  \tCURRENCY  \tCUSTOMER_ID\n" +
+                "19283746\t  10000.00\t   SGD\t        1\n" +
+                "19283747\t  20000.00\t   USD\t        2\n" +
+                "19283748\t  30000.00\t   EUR\t        3\n" +
+                "19283749\t  40000.00\t   USD\t        4\n" +
+                "19283750\t  22000.00\t   SGD\t        4\n" +
+                "19283751\t  50000.00\t   SGD\t        5\n" +
+                "19283752\t  67000.00\t   SGD\t        5");
     }
 }

@@ -4,12 +4,15 @@ import beans.request.TransferRequestBean;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Account;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import play.Application;
 import play.db.jpa.JPAApi;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.test.Helpers;
 import play.test.WithApplication;
 import startup.InMemoryDbInitialiser;
 
@@ -29,6 +32,8 @@ public class TransferControllerTest extends WithApplication {
     private static final String TRANSFER_ROUTE = "/transfer";
     private ObjectMapper mapper = new ObjectMapper();
 
+    private Application app;
+
     /**
      * DB SNAPSNOT AFTER INITIALISATION
      *
@@ -41,15 +46,20 @@ public class TransferControllerTest extends WithApplication {
      * 19283751	  50000.00	   SGD	        5
      * 19283752	  67000.00	   SGD	        5
      */
-    @Override
-    protected Application provideApplication() {
-        Application app = new GuiceApplicationBuilder().build();
+    @Before
+    public void setup() {
+        app = new GuiceApplicationBuilder().build();
+
+        Helpers.start(app);
 
         // init DB
         InMemoryDbInitialiser inMemoryDbInitialiser = app.injector().instanceOf(InMemoryDbInitialiser.class);
         inMemoryDbInitialiser.init();
+    }
 
-        return app;
+    @After
+    public void teardown() {
+        Helpers.stop(app);
     }
 
     @Test

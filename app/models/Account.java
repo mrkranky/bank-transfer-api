@@ -1,6 +1,5 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +23,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -34,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"customer", "lock", "deletedAt"})
+@ToString(exclude = {"customer", "lock"})
 @EqualsAndHashCode(exclude = {"customer", "lock"}, callSuper = false)
 @Builder
 public class Account extends BaseModel {
@@ -63,11 +61,6 @@ public class Account extends BaseModel {
 
     @Column(name = "customer_id", insertable = false, updatable = false)
     private Long customerId;
-
-    @JsonIgnore
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
-    @Column(name="deleted_at")
-    private Date deletedAt;
 
     public enum CurrencyEnum {
         USD, EUR, SGD;
