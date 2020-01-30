@@ -20,6 +20,8 @@ Play has a solid integration with Java Persistence API (JPA) for the Java ORM st
 Lombok reduces the code ceremony required by Java to do simple tasks and offers top-notch implementations of some of the most common patterns and tasks that we implement over and over such as Builders, Logs and HashCode.
 
 ## Test coverage
+Integration tests are added to cover controllers and unit tests are added to cover other classes.
+
 To run test cases, just do -
 <kbd>>sbt clean</kbd>
 <kbd>>sbt compile</kbd>
