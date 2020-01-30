@@ -42,13 +42,15 @@ A jacoco report would be generated in the target folder.
 [info] 
 ```
 
+#### The current line, branch and class coverage is 100%
+
+
 ## Challenges in the task
 
 1. To avoid deadlock while making transfers between User A to User B and User B to User A at the same time. 
 	- handled by taking locks always in the same order using account id
 2. Handling edge cases like negative amount transfer, double payment, thread synchronisation to get account details
 
-#### The current line, branch and class coverage is 100%
 
 ## Endpoints:
 ### ![POST](https://img.shields.io/badge/POST-red.svg?style=plastic) - Transfers money between two accounts
